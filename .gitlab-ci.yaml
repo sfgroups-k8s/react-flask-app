@@ -1,0 +1,38 @@
+
+default:
+  tags:
+    - "shell"
+
+stages:
+  - build
+  - docker-build
+  - deploy
+
+before_script:
+  - echo "Before script section"
+  - docker info
+
+after_script:
+  - echo "After script section"
+  - echo "For example you might do some cleanup here"
+
+build1:
+  stage: build
+  script:
+    - echo "Do your build here, running shell script"
+    - env
+    - sh build.sh
+
+docker-build:
+  stage: docker-build
+  tags:
+    - "shell"
+  script:
+    - docker build -t my-docker-image .
+
+deploy1:
+  stage: deploy
+  tags:
+    - "shell"
+  script:
+    - echo "Do your deploy here"
